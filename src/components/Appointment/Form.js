@@ -14,6 +14,7 @@ const Form = (props) => {
 
   function cancel() {
     reset();
+    props.onCancel();
   }
 
   function handleSubmit (event) {

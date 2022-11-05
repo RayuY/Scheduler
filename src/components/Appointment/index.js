@@ -1,27 +1,44 @@
 import React from 'react'
-import './styles.scss'
-import Header from './Header'
-import Show from './Show'
-import Empty from './Empty'
-import { Fragment } from 'react'
+import 'components/Appointment/styles.scss'
+import Header from 'components/Appointment/Header'
+import Show from 'components/Appointment/Show'
+import Empty from 'components/Appointment/Empty'
+import Form from 'components/Appointment/Form'
+import useVisualMode from 'hooks/useVisualMode'
 
 
+const Appointment = (props) => {
 
-const index = (props) => {
-
-  console.log(props.interview)
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  )
 
   return (
-    <Fragment>
+    <article className="appointment">
       <Header time={props.time} />
-      {props.interview ?
+      {/* {props.interview ?
         <Show student={props.interview.student} interviewer={props.interview.interviewer} /> :
         <Empty />
-      }
-    </Fragment>
+      } */}
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+        />
+      )}
+      {mode === CREATE && (
+        <Form
+          interviewers={props.interviewers}
+          onCancel={() => transition(EMPTY)}
+        />
+      )}
+    </article>
   )
 }
 
-export default index
-
-
+export default Appointment
