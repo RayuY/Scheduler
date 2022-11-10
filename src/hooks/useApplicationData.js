@@ -51,8 +51,6 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
-    console.log(interview)
-
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((res) => {
         const days = countSpotsLeft(appointments, state.day, state.days)
