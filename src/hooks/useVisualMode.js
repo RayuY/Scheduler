@@ -5,7 +5,9 @@ export default function useVisualMode(initial) {
 
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
-  
+
+
+  // updates the history state array to decide which appointment component to show 
   const transition = (stateMode, replace = false) => {
 
     setMode(stateMode)
@@ -21,6 +23,7 @@ export default function useVisualMode(initial) {
     });
   };
 
+  // when axios fails, cleans the action and error history, reset state back to before axios call
   const back = () => {
     const prevMode = [...history][(history.length - 2)];
 

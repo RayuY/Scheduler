@@ -11,6 +11,7 @@ export default function useApplicationData(props) {
     interviewers: {},
   });
 
+  // fetch data api server
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -26,7 +27,7 @@ export default function useApplicationData(props) {
     });
   }, [])
 
-  // helper function
+  // helper function to be called in bookInterview and cancelInterview to provide updated spots left based on user action.
   function countSpotsLeft(appointments, day, days) {
 
     let spots = 0;
@@ -41,6 +42,7 @@ export default function useApplicationData(props) {
     return newDaysArr;
   }
 
+  // books an appointment for user and update api database to keep changes
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -51,6 +53,7 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
+    // updates database with new appointment
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((res) => {
         const days = countSpotsLeft(appointments, state.day, state.days)
@@ -58,6 +61,7 @@ export default function useApplicationData(props) {
       })
   }
 
+  // cancels an appointment for user and update api database to keep changes
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -68,6 +72,7 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
+    // delete appointment from database
     return axios.delete(`/api/appointments/${id}`)
       .then((res) => {
         const days = countSpotsLeft(appointments, state.day, state.days)
@@ -75,6 +80,7 @@ export default function useApplicationData(props) {
       })
   }
 
+  // updates state.day
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
 
   return {

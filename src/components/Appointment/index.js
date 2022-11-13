@@ -23,10 +23,13 @@ const Appointment = (props) => {
   const ERROR_DELETE = "ERROR_DELETE"
 
 
+  // import helper functions from hooks 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   )
 
+
+  // saves an appointment, shows transition SAVING and catch if there's error saving
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -45,6 +48,7 @@ const Appointment = (props) => {
       })
   }
 
+  // cancels an appointment, shows transition CONFIRM and catch if there's error saving
   function destroy() {
     transition(DELETE, true);
     props.cancelInterview(props.id)

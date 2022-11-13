@@ -10,6 +10,7 @@ import "components/Application.scss";
 
 export default function Application() {
 
+  // hooks
   const {
     state,
     setDay,

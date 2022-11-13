@@ -11,16 +11,15 @@ export default function DayListItem(props) {
     'day-list__item--full': props.spots === 0
   });
 
+  // returns matching statements based on spots remaining
   function formatSpots() {
 
     if (props.spots === 0) {
       return 'no spots remaining'
     }
-
     if (props.spots === 1) {
       return `${props.spots} spot remaining`
     }
-
     if (props.spots > 1) {
       return `${props.spots} spots remaining`
     }

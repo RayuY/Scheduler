@@ -1,4 +1,6 @@
-// -----------
+
+
+// returns appointment IDs for a specific day
 export function getAppointmentsForDay(state, dayName) {
 
   if (!dayName) {
@@ -21,7 +23,7 @@ export function getAppointmentsForDay(state, dayName) {
 };
 
 
-// -----------
+// returns interviewers for a specific day
 export function getInterviewersForDay(state, day) {
   
   let interviewers = [];
@@ -46,7 +48,7 @@ export function getInterviewersForDay(state, day) {
 };
 
 
-// -----------
+// returns information of a specific interview
 export function getInterview(state, interview) {
   if (!interview) {
     return null;
